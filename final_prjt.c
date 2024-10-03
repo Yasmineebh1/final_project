@@ -3,7 +3,7 @@
 
 #define MAX 100
 
-// gloval declaration
+// global declaration
 char nom[MAX][100];
 char prenom[MAX][100];
 char telephone[MAX][20];
@@ -219,12 +219,8 @@ void recherche_nom(){
     printf("entrer le nom de patients que vous voudrai recherche: ");
     scanf("%s", &Nom);
 
-    // if(!nom)
-    // {
-    //     printf("ce nom n ya pas dans la liste\n");
-    //     return;
-    // }
-
+    
+    int found = 0;
     for (int i = 0; i < count_rev; i++)
     {
         if (strcmp(nom[i],Nom))
@@ -237,7 +233,43 @@ void recherche_nom(){
             printf("Status: %s\n", status[i]);
             printf("Date: %s\n", date[i]);
             printf("\n");
+            found = 1;
         }
+       
+    }
+     if(!found)
+    {
+        printf("ce nom n ya pas dans la liste\n");
+        return;
+    }
+}
+void recherche_date(){
+    char Date[MAX];
+    printf("entrer la date de patients que vous voudrai recherche: ");
+    scanf("%s", &date);
+
+    
+    int found = 0;
+    for (int i = 0; i < count_rev; i++)
+    {
+        if (strcmp(date[i],Date))
+        {
+            printf("Reference: %d\n", reference[i]);
+            printf("Nom: %s\n", nom[i]);
+            printf("Prenom: %s\n", prenom[i]);
+            printf("Telephone: %s\n", telephone[i]);
+            printf("Age: %d\n", age[i]);
+            printf("Status: %s\n", status[i]);
+            printf("Date: %s\n", date[i]);
+            printf("\n");
+            found = 1;
+        }
+       
+    }
+     if(!found)
+    {
+        printf("cette date n ya pas dans la liste\n");
+        return;
     }
 }
 //rechercher
@@ -259,7 +291,8 @@ void rechercher()
     case 2:
         recherche_nom();
         break;
-    
+    case 3:
+        recherche_date();
     default:
         break;
     }
