@@ -12,6 +12,7 @@ char status[MAX][20];
 int reference[MAX];
 char date[MAX][20];
 int count_rev = 0;
+int i;
 
 // ajout des reservations
 void ajout()
@@ -53,60 +54,64 @@ void choix_modification()
 {
     int ref;
     int found = 0;
+    int i;
 
     printf("Entrer la reference de la reservation: ");
     scanf("%d", &ref);
-    for (int i = ref; i < count_rev; i++)
+    if (ref == reference[i])
     {
-        found = 1;
-        int choix;
-        do
+        for (int i = ref; i < count_rev; i++)
         {
-            printf("1. Modifier le Nom\n");
-            printf("2. Modifier le Prenom\n");
-            printf("3. Modifier le Telephone\n");
-            printf("4. Modifier l'Age\n");
-            printf("5. Modifier le Status\n");
-            printf("6. Modifier la Date\n");
-            printf("7. Quitter la modification\n");
-            printf("Choisissez votre choix: ");
-            scanf("%d", &choix);
-
-            switch (choix)
+            found = 1;
+            int choix;
+            do
             {
-            case 1:
-                printf("donner le nouveau nom : ");
-                scanf("%s", nom[i]);
-                break;
-            case 2:
-                printf("donner le nouveau prenom: ");
-                scanf("%s", prenom[i]);
-                break;
-            case 3:
-                printf("donner le nouveau telephone: ");
-                scanf("%s", telephone[i]);
-                break;
-            case 4:
-                printf("donner le Nouvel age: ");
-                scanf("%d", &age[i]);
-                break;
-            case 5:
-                printf("donner le nouveau status: ");
-                scanf("%s", status[i]);
-                break;
-            case 6:
-                printf("donner la nouvelle date: ");
-                scanf("%s", date[i]);
-                break;
-            case 7:
-                printf("Quitter\n");
-                return;
-                break;
-            default:
-                printf("Choix invalide.\n");
-                break;
-            }
-        } while (choix != 7);
+                printf("1. Modifier le Nom\n");
+                printf("2. Modifier le Prenom\n");
+                printf("3. Modifier le Telephone\n");
+                printf("4. Modifier l'Age\n");
+                printf("5. Modifier le Status\n");
+                printf("6. Modifier la Date\n");
+                printf("7. Quitter la modification\n");
+                printf("Choisissez votre choix: ");
+                scanf("%d", &choix);
+
+                switch (choix)
+                {
+                case 1:
+                    printf("donner le nouveau nom : ");
+                    scanf("%s", nom[i]);
+                    break;
+                case 2:
+                    printf("donner le nouveau prenom: ");
+                    scanf("%s", prenom[i]);
+                    break;
+                case 3:
+                    printf("donner le nouveau telephone: ");
+                    scanf("%s", telephone[i]);
+                    break;
+                case 4:
+                    printf("donner le Nouvel age: ");
+                    scanf("%d", &age[i]);
+                    break;
+                case 5:
+                    printf("donner le nouveau status: ");
+                    scanf("%s", status[i]);
+                    break;
+                case 6:
+                    printf("donner la nouvelle date: ");
+                    scanf("%s", date[i]);
+                    break;
+                case 7:
+                    printf("Quitter\n");
+                    return;
+                    break;
+                default:
+                    printf("Choix invalide.\n");
+                    break;
+                }
+            } while (choix != 7);
+        }
     }
 }
 
@@ -179,10 +184,89 @@ void afficher()
     }
     count_rev++;
 }
-//function de recherche
+
+//Recherche d'une réservation par référence unique
+void recherche_ref()
+{
+    int ref;
+    printf("entrer le reference de patients que vous voudrai recherche: ");
+    scanf("%d", &ref);
+
+    if (ref < 1 || ref > count_rev)
+    {
+        printf("ce reference n ya pas dans la liste\n");
+        return;
+    }
+
+    for (int i = 0; i < count_rev; i++)
+    {
+        if (ref == reference[i])
+        {
+            printf("Reference: %d\n", reference[i]);
+            printf("Nom: %s\n", nom[i]);
+            printf("Prenom: %s\n", prenom[i]);
+            printf("Telephone: %s\n", telephone[i]);
+            printf("Age: %d\n", age[i]);
+            printf("Status: %s\n", status[i]);
+            printf("Date: %s\n", date[i]);
+            printf("\n");
+        }
+    }
+}
+//Recherche d'une réservation par nom
+void recherche_nom(){
+    char Nom[MAX];
+    printf("entrer le nom de patients que vous voudrai recherche: ");
+    scanf("%s", &Nom);
+
+    // if(!nom)
+    // {
+    //     printf("ce nom n ya pas dans la liste\n");
+    //     return;
+    // }
+
+    for (int i = 0; i < count_rev; i++)
+    {
+        if (strcmp(nom[i],Nom))
+        {
+            printf("Reference: %d\n", reference[i]);
+            printf("Nom: %s\n", nom[i]);
+            printf("Prenom: %s\n", prenom[i]);
+            printf("Telephone: %s\n", telephone[i]);
+            printf("Age: %d\n", age[i]);
+            printf("Status: %s\n", status[i]);
+            printf("Date: %s\n", date[i]);
+            printf("\n");
+        }
+    }
+}
+//rechercher
 void rechercher()
 {
+    int choix;
+    printf("choississez votre recherche:\n");
+    printf("1. Recherche d'une reservation par reference unique.\n");
+    printf("2.Recherche d'une reservation par nom.\n");
+    printf("3.Recherche d'une reservation par date.\n");
+    printf("Choisissez votre choix: ");
+    scanf("%d", &choix);
+
+    switch (choix)
+    {
+    case 1:
+        recherche_ref();
+        break;
+    case 2:
+        recherche_nom();
+        break;
+    
+    default:
+        break;
+    }
+    recherche_nom();
+    recherche_ref();
 }
+
 int main()
 {
     int choix;
@@ -195,6 +279,7 @@ int main()
         printf("5. Recherche des reservations.\n");
         printf("6. Statistiques.\n");
         printf("7. Quitter.\n");
+        printf("taper votre choix: ");
         scanf("%d", &choix);
 
         switch (choix)
@@ -207,6 +292,9 @@ int main()
             break;
         case 3:
             afficher();
+            break;
+        case 5:
+            rechercher();
             break;
         case 7:
             printf("quitter!\n");
