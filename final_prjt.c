@@ -60,7 +60,7 @@ void choix_modification()
     scanf("%d", &ref);
     if (ref == reference[i])
     {
-        for (int i = ref; i < count_rev; i++)
+        for (int i = 0; i < count_rev; i++)
         {
             found = 1;
             int choix;
