@@ -131,13 +131,14 @@ void modifier_supprimer()
     {
         printf("ce reference n ya pas dans la liste\n");
         return;
+
     }
     int found = 0;
     switch (choix)
     {
     case 1:
 
-        choix_modification(ref);
+        choix_modification();
         break;
 
     case 2:
@@ -299,7 +300,10 @@ void rechercher()
     recherche_nom();
     recherche_ref();
 }
+//tri de reservation
+void tri_nom(){
 
+}
 int main()
 {
     int choix;
