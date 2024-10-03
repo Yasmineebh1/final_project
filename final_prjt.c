@@ -235,7 +235,7 @@ void recherche_nom(){
             printf("\n");
             found = 1;
         }
-       
+       return;
     }
      if(!found)
     {
