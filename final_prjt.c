@@ -6,73 +6,76 @@ struct Reservation
 {
     char Nom[MAX][100];
     char prenom[MAX][100];
-    int telephone;
+    char telephone[20];
     int age;
-    char status;
+    char status[MAX][20];
     int reference;
-    char date[MAX];
+    char date[20];
 };
 
-void status()
-{
-    char status;
-    printf("choississez le status: ");
-    printf("1.valide");
-    printf("2.reporte");
-    printf("3.annule");
-    printf("4.traite");
-    scanf("%s", &status);
-    switch (status)
-    {
-    case 1:
-    //strcpy()
-        break;
-    case 2:
-        break;
-    case 3:
-        break;
-    case 4:
-        break;
-    default:
-        break;
-    }
-}
+// reservation total pour le compter
 
+// declaration globale
+int count_rev = 0;
+int i = 0;
+
+
+// ajout
 void ajout()
 {
-    struct Reservation reservation;
-    int n;
-    printf("donne moi le nombre de reservation que vous voules ajouter: ");
-    scanf("%d", &n);
-    for (int i = 0; i < n; i++)
+
+    if (count_rev < MAX)
     {
+
+        struct Reservation reservation;
         printf("reference %d\n", i + 1);
-        scanf("%d",&reservation.reference);
-        printf("Ajouter le Nom: \n");
-        scanf("%s",&reservation.Nom[i]);
-        printf("Ajouter le Prenom: \n");
-        scanf("%s",&reservation.prenom[i]);
-        printf("Ajouter le Telephone: \n");
-        scanf("%d",&reservation.telephone);
-        printf("Ajouter Age: \n");
-        scanf("%d",&reservation.age);
-        printf("Ajouter le Statut: \n");
-        status();
-        scanf("%d",&reservation.status);
-        printf("Ajouter la Date de réservation: \n");
-        scanf("%d",&reservation.date[i]);
+        // scanf("%d",&reservation.reference);
+        printf("Ajouter le Nom: ");
+        scanf("%s", &reservation.Nom[i]);
+        printf("Ajouter le Prenom: ");
+        scanf("%s", &reservation.prenom[i]);
+        printf("Ajouter le Telephone (xxxx-xx-xxxx): ");
+        scanf("%s", &reservation.telephone);
+        printf("Ajouter Age: ");
+        scanf("%d", &reservation.age);
+        printf("Ajouter le Status (valide, reporte, annule, traite): ");
+        scanf("%s", &reservation.status[i]);
+        printf("Ajouter la Date de reservation(DD-MM-YYYY): ");
+        scanf("%s", &reservation.date);
+
+        printf("reservation ajoutee avec succees\n");
+        // ajout la nouvel reserrvation
+        
+        count_rev++;
     }
+
+    // gonna show when the MAX > 100
+    else
+        printf("le maximum de reservation a ete atteint.\n");
 }
 
+void modifier_supprimer()
+{
+}
+// fake ddata
+//  struct ten_fake_data(){
+//     // char info1[10]={1,"yas","douae","0387-889-94",22,"valide","02-10-2024"},
+//      //char prenom[10] = {"yao","aso","dodo","fff","ghiz","aml","mery","lili","chai","choo"};
+//     // char sta
+//  }
+//  void initialissation_daa(){
+//      for(int i = 0;i < i;i++){
+//          Reservation[i] = ten_fake_data[i];
+//      }
+//  }
 int main()
 {
-    
-    
+
     int choix;
     do
     {
         printf("les reservations de rendez-vous dentaires\n");
-        printf("1. Ajouter une reservation.");
+        printf("1. Ajouter une reservation.\n");
         printf("2. Modifier ou supprimer une reservation.\n");
         printf("3. Afficher les details d une reservation.\n");
         printf("4. Tri des reservations.\n");
