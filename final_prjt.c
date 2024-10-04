@@ -299,7 +299,7 @@ void recherche_ref()
 
     for (int i = 0; i < count_rev; i++)
     {
-        if (ref == reference[i]) //check if they are equal
+        if (ref == reference[i]) // check if they are equal
         {
             printf("Reference: %d\n", reference[i]);
             printf("Nom: %s\n", nom[i]);
@@ -309,7 +309,6 @@ void recherche_ref()
             printf("Status: %s\n", status[i]);
             printf("Date: %s\n", date[i]);
             printf("\n");
-            
         }
         return;
     }
@@ -324,7 +323,7 @@ void recherche_nom()
     int found = 0;
     for (int i = 0; i < count_rev; i++)
     {
-        if (strcmp(nom[i], Nom) == 0) //check if they are equal
+        if (strcmp(nom[i], Nom) == 0) // check if they are equal
         {
             printf("Reference: %d\n", reference[i]);
             printf("Nom: %s\n", nom[i]);
@@ -354,7 +353,7 @@ void recherche_date()
     int found = 0;
     for (int i = 0; i < count_rev; i++)
     {
-        if (strcmp(Date,date[i])) //check if they are equal
+        if (strcmp(Date, date[i])) // check if they are equal
         {
             printf("Reference: %d\n", reference[i]);
             printf("Nom: %s\n", nom[i]);
@@ -441,56 +440,98 @@ void rechercher()
 //         break;
 //     }
 // }
-
-void statistique(){
-     int choix;
-     printf("Statistiques: ");
-     printf("1.Calculer la moyenne d age des patients ayant reserve");
-     printf("2.Afficher le nombre de patients par tranche d age");
-     printf("3.statistiques pour connaitre le nombre total de reservations par statut");
-     printf("entrer votre choix:");
-     scanf("%d",&choix);
+// globale declaration for statistique
+int valide = 0;
+int reporte = 0;
+int annule = 0;
+int traite = 0;
+int somme;
+int moyenne;
+int a = 0;
+int b = 0;
+int c = 0;
+int i;
+void statistique()
+{
+    int choix;
+    printf("Statistiques: \n");
+    printf("1.Calculer la moyenne d age des patients ayant reserve\n");
+    printf("2.Afficher le nombre de patients par tranche d age \n");
+    printf("3.statistiques pour connaitre le nombre total de reservations par statut\n");
+    printf("entrer votre choix:");
+    scanf("%d", &choix);
 
     switch (choix)
     {
+        // Calculer la moyenne d age des patients ayant reserve
     case 1:
-        int s = 0;
-        if (count_rev == 0) {
-        printf("ya pas cette reservation\n");
-        for (int i = 0; i < reference; i++)
+
+        if (count_rev == 0)
         {
-            s = s + age;
-
+            printf("ya pas cette reservation\n");
         }
-        int moyenne = s / moyenne;
-        printf("la moyenne age des patients est: %d",moyenne);
-    }
+
+        for (i = 0; i < count_rev; i++)
+        {
+            somme = somme + age[i];
+        }
+        moyenne = somme / moyenne;
+        printf("la moyenne age des patients est: %d\n", moyenne);
+
         break;
+        //.Afficher le nombre de patients par tranche d age
+
     case 2:
-       int a = 0;
-        int b = 0;
-        int c = 0;
-        for(i=0 ; i<count_rev ; i++){
-            if(age <= 18)
-              a++;
 
-        printf("le nombre de patients qui en entre 0-18 ans : %d \n", a);
+        for (i = 0; i < count_rev; i++)
+        {
+            if (age[i] <= 18)
+            {
+                a++;
 
-        for(i = 0 ; i < count_rev ; i++){
-            if(age >= 19 && age < 36)
-              b++;
+                printf("le nombre de patients qui en entre 0-18 ans : %d \n", a);
+            }
+            else if (age[i] <= 35)
+            {
+                b++;
+                printf("le nombre de patients qui en entre 19-35 ans : %d \n", b);
+            }
+            else
+            {
+                c++;
+
+                printf("le nombre de patients qui en entre 36+ ans : %d \n", c);
+            }
         }
-        printf("le nombre de patients qui en entre 19-35 ans : %d \n", b);
+        break;
+    case 3:
 
-        for(i=0 ; i<count_rev ; i++){
-            if(age > 35)
-              c++;
+        for (i = 0; i < count_rev; i++)
+        {
+            if (strcmp(status[i], "valide") == 0)
+            {
+                valide++;
+                printf("%d est le nombre des reservations validees \n", valide);
+            }
+            else if ((strcmp(status[i], "reporte") == 0))
+            {
+                reporte++;
+                printf("%d est le nombre des reservations reportees \n", reporte);
+            }
+            else if ((strcmp(status[i], "annule") == 0))
+            {
+                annule++;
+                printf("%d est le nombre des reservations annulees \n", annule);
+            }
+            else if ((strcmp(status[i], "traite") == 0))
+            {
+                traite++;
+                printf("%d est le nombre des reservations traitees \n", traite);
+            }
         }
-        printf("le nombre de patients qui en entre 36+ ans : %d \n", c);
-
-    }
 
     default:
+        printf(" invalide.\n");
         break;
     }
 }
