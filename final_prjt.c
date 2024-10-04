@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-
 #define MAX 100
 
 // global declaration
@@ -11,10 +10,24 @@ int age[MAX];
 char status[MAX][20];
 int reference[MAX];
 char date[MAX][20];
+
 int count_rev = 0;
 int i;
 
 // ajout des reservations
+
+void fake_info[MAX] = {
+    {1, "yasmine", "yas", "076487893", 20, "valide", "12/12/2024"},
+    {2, "yas", "ppp", "076487213", 11, "reporte", "12/1/2024"},
+    {3, "dod", "dddd", "076487213", 22, "valide", "12/11/2024"},
+    {4, "ssjdkd", "jfjkf", "076487213", 18, "traite", "12/4/2025"},
+    {5, "dfff", "fdjklf", "076487213", 12, "annule", "12/20/2024"},
+    {6, "meryem", "fvkfkf", "076487213", 36, "reporte", "1/10/2024"},
+    {7, "leila", "dffdfd", "076487213", 56, "reporte", "29/11/2024"},
+    {8, "aya", "ffdg", "076487213", 47, "traite", "1/3/2025"},
+    {9, "fatima", "ogfdff", "076487213", 18, "valide", "23/11/2024"},
+    {10, "rawaa", "edfdf", "076487213", 33, "annule", "20/6/2025"},
+};
 void ajout()
 {
     int n;
@@ -58,6 +71,7 @@ void choix_modification()
 
     printf("Entrer la reference de la reservation: ");
     scanf("%d", &ref);
+    // comparison
     if (ref == reference[i])
     {
         for (int i = 0; i < count_rev; i++)
@@ -131,7 +145,6 @@ void modifier_supprimer()
     {
         printf("ce reference n ya pas dans la liste\n");
         return;
-
     }
     int found = 0;
     switch (choix)
@@ -163,9 +176,10 @@ void modifier_supprimer()
     }
 }
 
-// Function to display reservations
+// fonction d'affichage
 void afficher()
 {
+    
     if (count_rev == 0)
     {
         printf("nya pas de reservation.\n");
@@ -186,7 +200,7 @@ void afficher()
     count_rev++;
 }
 
-//Recherche d'une réservation par référence unique
+// Recherche d'une réservation par référence unique
 void recherche_ref()
 {
     int ref;
@@ -214,17 +228,17 @@ void recherche_ref()
         }
     }
 }
-//Recherche d'une réservation par nom
-void recherche_nom(){
+// Recherche d'une réservation par nom
+void recherche_nom()
+{
     char Nom[MAX];
     printf("entrer le nom de patients que vous voudrai recherche: ");
     scanf("%s", &Nom);
 
-    
     int found = 0;
     for (int i = 0; i < count_rev; i++)
     {
-        if (strcmp(nom[i],Nom))
+        if (strcmp(nom[i], Nom))
         {
             printf("Reference: %d\n", reference[i]);
             printf("Nom: %s\n", nom[i]);
@@ -236,24 +250,25 @@ void recherche_nom(){
             printf("\n");
             found = 1;
         }
-       return;
+        return;
     }
-     if(!found)
+    if (!found)
     {
         printf("ce nom n ya pas dans la liste\n");
         return;
     }
 }
-void recherche_date(){
+// recherche par date
+void recherche_date()
+{
     char Date[MAX];
     printf("entrer la date de patients que vous voudrai recherche: ");
     scanf("%s", &date);
 
-    
     int found = 0;
     for (int i = 0; i < count_rev; i++)
     {
-        if (strcmp(date[i],Date))
+        if (strcmp(date[i], Date))
         {
             printf("Reference: %d\n", reference[i]);
             printf("Nom: %s\n", nom[i]);
@@ -265,15 +280,14 @@ void recherche_date(){
             printf("\n");
             found = 1;
         }
-       
     }
-     if(!found)
+    if (!found)
     {
         printf("cette date n ya pas dans la liste\n");
         return;
     }
 }
-//rechercher
+// rechercher
 void rechercher()
 {
     int choix;
@@ -300,10 +314,127 @@ void rechercher()
     recherche_nom();
     recherche_ref();
 }
-//tri de reservation
-void tri_nom(){
 
+// tri
+void tri()
+{
+    int choix;
+    printf("Tri des reservations\n");
+    printf("1.Tri des reservations par Nom\n");
+    printf("2.Tri des reservations par date\n");
+    printf("Tri des réservations par statut\n");
+    printf("entrer votre choix: ");
+    scanf("%d", &choix);
+    switch (choix)
+    {
+    case 1:
+        
+    char valtemp[MAX];
+    // swap nom
+
+    for (i = 0; i < count_rev - 1; i++)
+    {
+        for (int j = 0; j < count_rev -i - 1; j++)
+        {
+            // compare
+            if(strcasecmp(nom[j], nom[j+1]) > 0) 
+            {
+                // swap if the nom[i] > nom[j]
+
+                valtemp = nom[j];
+                nom[j] = nom[j+1][];
+                nom[j+1] = valtemp;
+            }
+        }
+    }
+        break;
+
+    default:
+        break;
+    }
 }
+
+//statistique
+//Générer des statistiques pour connaître le nombre total de réservations par statut 
+void statistique(){
+    int choix;
+    printf("Statistiques: ");
+    printf("1.Calculer la moyenne d age des patients ayant reserve");
+    printf("2.Afficher le nombre de patients par tranche d age");
+    printf("3.statistiques pour connaitre le nombre total de reservations par statut");
+    printf("entrer votre choix:");
+    scanf("%d",&choix);
+
+    switch (choix)
+    {
+    case 1:
+        int s = 0;
+        if (count_rev == 0) {
+        printf("ya pas cette reservation\n");
+        for (INT i = 0; i < reference; i++)
+        {
+            s = s + age;
+
+        }
+        int moyenne = s / moyenne;
+        printf("la moyenne age des patients est: %d",moyenne);        
+    }
+        break;
+    
+    default:
+        break;
+    }
+}
+/*
+void statistiques() {
+    
+
+    int totalAge = 0;
+    int tranche0_18 = 0, tranche19_35 = 0, tranche36Plus = 0;
+    int valide = 0, reporte = 0, annule = 0, traite = 0;
+
+    // Parcourir toutes les réservations pour calculer les statistiques
+    for (int i = 0; i < reservationCount; i++) {
+        totalAge += reservations[i].age;
+
+        // Compter les patients par tranche d'âge
+        if (reservations[i].age <= 18) {
+            tranche0_18++;
+        } else if (reservations[i].age <= 35) {
+            tranche19_35++;
+        } else {
+            tranche36Plus++;
+        }
+
+        // Compter les réservations par statut
+        if (strcmp(reservations[i].status, "valide") == 0) {
+            valide++;
+        } else if (strcmp(reservations[i].status, "reporte") == 0) {
+            reporte++;
+        } else if (strcmp(reservations[i].status, "annule") == 0) {
+            annule++;
+        } else if (strcmp(reservations[i].status, "traite") == 0) {
+            traite++;
+        }
+    }
+
+    // Calcul de la moyenne d'âge
+    float moyenneAge = (float)totalAge / reservationCount;
+
+    // Affichage des statistiques
+    printf("\n--- Statistiques des Réservations ---\n");
+    printf("1. Moyenne d'âge des patients : %.2f ans\n", moyenneAge);
+    printf("2. Nombre de patients par tranche d'âge :\n");
+    printf("   - 0-18 ans : %d\n", tranche0_18);
+    printf("   - 19-35 ans : %d\n", tranche19_35);
+    printf("   - 36+ ans : %d\n", tranche36Plus);
+
+    printf("3. Nombre total de réservations par statut :\n");
+    printf("   - Valide : %d\n", valide);
+    printf("   - Reporté : %d\n", reporte);
+    printf("   - Annulé : %d\n", annule);
+    printf("   - Traité : %d\n", traite);
+} */
 int main()
 {
     int choix;
@@ -332,6 +463,9 @@ int main()
             break;
         case 5:
             rechercher();
+            break;
+        case 4:
+            tri();
             break;
         case 7:
             printf("quitter!\n");
