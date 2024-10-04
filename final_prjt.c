@@ -413,7 +413,7 @@ void tri()
     printf("Tri des reservations\n");
     printf("1.Tri des reservations par Nom\n");
     // printf("2.Tri des reservations par date\n");
-    printf("2.Tri des réservations par statut\n");
+    printf("2.Tri des reservations par statut\n");
     printf("entrer votre choix: ");
     scanf("%d", &choix);
     switch (choix)
