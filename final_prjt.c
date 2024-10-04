@@ -261,6 +261,7 @@ void modifier_supprimer()
         break;
     }
 }
+
 // fonction d'affichage
 void afficher()
 {
@@ -272,6 +273,7 @@ void afficher()
 
     for (int i = 0; i < count_rev; i++)
     {
+        printf("\n---------------------------------\n");
         printf("Reference: %d\n", reference[i]);
         printf("Nom: %s\n", nom[i]);
         printf("Prenom: %s\n", prenom[i]);
@@ -279,7 +281,7 @@ void afficher()
         printf("Age: %d\n", age[i]);
         printf("Status: %s\n", status[i]);
         printf("Date: %s\n", date[i]);
-        printf("\n");
+        printf("\n---------------------------------\n");
     }
     // count_rev++;
 }
@@ -402,44 +404,70 @@ void rechercher()
     }
 }
 
+// global declaration
+char temp[100];
 // tri
-// void tri()
-// {
-//     int choix;
-//     printf("Tri des reservations\n");
-//     printf("1.Tri des reservations par Nom\n");
-//     printf("2.Tri des reservations par date\n");
-//     printf("Tri des réservations par statut\n");
-//     printf("entrer votre choix: ");
-//     scanf("%d", &choix);
-//     switch (choix)
-//     {
-//     case 1:
+void tri()
+{
+    int choix;
+    printf("Tri des reservations\n");
+    printf("1.Tri des reservations par Nom\n");
+    // printf("2.Tri des reservations par date\n");
+    printf("2.Tri des réservations par statut\n");
+    printf("entrer votre choix: ");
+    scanf("%d", &choix);
+    switch (choix)
+    {
+    case 1:
+        // swap nom
+        for (int i = 0; i < count_rev - 1; i++)
+        {
+            for (int j = 0; j < count_rev - i - 1; j++)
+            {
+                // compare :
+                if (strcmp(nom[j], nom[j + 1]) > 0)
+                {
+                    // swap if the nom[i] > nom[j]
+                    strcpy(temp, nom[j]);
+                    strcpy(nom[j], nom[j+1]);
+                    strcpy(nom[j+1], temp);
+                    // temp = nom[j];
+                    // nom[j] = nom[j + 1];
+                    // nom[j + 1] = temp;
+                }
+            }
+        }
+        printf("\napres le tris par nom:\n");
+        afficher();
+        break;
+    case 2:
+        // swap status
+        for (int i = 0; i < count_rev - 1; i++)
+        {
+            for (int j = 0; j < count_rev - i - 1; j++)
+            {
+                // compare :
+                if (strcmp(status[j], status[j + 1]) > 0)
+                {
+                    // swap if the status[i] > status[j]
+                    strcpy(temp, status[j]);
+                    strcpy(status[j], status[j+1]);
+                    strcpy(status[j+1], temp);
+                    // temp = nom[j];
+                    // nom[j] = nom[j + 1];
+                    // nom[j + 1] = temp;
+                }
+            }
+        }
+        printf("\napres le tris par status:\n");
+        afficher();
+        break;
 
-//     char valtemp[MAX];
-//     // swap nom
+    default:
+        break;
+    }
+}
 
-//     for (i = 0; i < count_rev - 1; i++)
-//     {
-//         for (int j = 0; j < count_rev -i - 1; j++)
-//         {
-//             // compare
-//             if(strcasecmp(nom[j], nom[j+1]) > 0)
-//             {
-//                 // swap if the nom[i] > nom[j]
-
-//                 valtemp = nom[j];
-//                 nom[j] = nom[j+1][];
-//                 nom[j+1] = valtemp;
-//             }
-//         }
-//     }
-//         break;
-
-//     default:
-//         break;
-//     }
-// }
 // globale declaration for statistique
 int valide = 0;
 int reporte = 0;
@@ -563,12 +591,12 @@ int main()
         case 3:
             afficher();
             break;
+        case 4:
+            tri();
+            break;
         case 5:
             rechercher();
             break;
-        // case 4:
-        //     tri();
-        //     break;
         case 6:
             statistique();
             break;
