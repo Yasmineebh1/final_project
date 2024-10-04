@@ -475,7 +475,7 @@ void statistique()
         {
             somme = somme + age[i];
         }
-        moyenne = somme / moyenne;
+        moyenne = somme / count_rev;
         printf("la moyenne age des patients est: %d\n", moyenne);
 
         break;
